@@ -26,7 +26,14 @@ export function Home() {
 
     return (
         <div className="container">
-            <h1>LISTA</h1>
+            <header>
+                <h1>LISTA</h1>
+                <div>
+                    <strong>Miqueias</strong>
+                    <img src="https://pbs.twimg.com/media/FaA3EjpWAAAzDjy.jpg" alt="Profile Picture" />
+                </div>
+            </header>
+
             <input
                 type=""
                 placeholder='Digite o nome...'
