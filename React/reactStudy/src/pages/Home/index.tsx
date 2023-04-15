@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css'
 import { Card } from '../../components/Card';
 
@@ -9,7 +9,8 @@ interface Student {
 
 export function Home() {
     const [name, setName] = useState('');
-    const [students, setStudents] = useState<Student[]>([])
+    const [students, setStudents] = useState<Student[]>([]);
+    const [user, setUser] = useState({ name: '', avatar: '' });
 
     function handleAddStudent() {
         const newStudent: Student = {
@@ -24,13 +25,24 @@ export function Home() {
         setStudents([...students, newStudent]);
     }
 
+    useEffect(() => {
+        fetch('https://api.github.com/users/miqstelles')
+            .then(response => response.json())
+            .then(data => {
+                setUser({
+                    name: data.login,
+                    avatar: data.avatar_url
+                })
+            })
+    }, []);
+
     return (
         <div className="container">
             <header>
                 <h1>LISTA</h1>
                 <div>
-                    <strong>Miqueias</strong>
-                    <img src="https://pbs.twimg.com/media/FaA3EjpWAAAzDjy.jpg" alt="Profile Picture" />
+                    <strong>{user.name}</strong>
+                    <img src={user.avatar} alt="Profile Picture" />
                 </div>
             </header>
 
