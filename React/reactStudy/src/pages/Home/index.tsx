@@ -26,14 +26,16 @@ export function Home() {
     }
 
     useEffect(() => {
-        fetch('https://api.github.com/users/miqstelles')
-            .then(response => response.json())
-            .then(data => {
-                setUser({
-                    name: data.login,
-                    avatar: data.avatar_url
-                })
-            })
+        async function fetchData() {
+            const response = await fetch('https://api.github.com/users/miqstelles')
+            const data = await response.json()
+            setUser({
+                name: data.login,
+                avatar: data.avatar_url,
+            });
+        }
+
+        fetchData()
     }, []);
 
     return (
